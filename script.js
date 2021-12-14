@@ -1,7 +1,8 @@
 // create variable that targets DOM element with id of "currentDay"
 var todaysDate = document.getElementById('currentDay');
 var timeBlockDivs = document.querySelectorAll(".time-block");
-
+var saveActivity = document.querySelectorAll(".saveBtn");
+console.log(saveActivity);
 var currentTime = moment().format('h A');
 var currentHourOfDay = convertTimeToHourOfDay(currentTime);
 console.log(currentHourOfDay);
@@ -21,7 +22,7 @@ function convertTimeToHourOfDay(timeString) {
 // set background color of time-block divs based on whether the time slot is in the past, future, or present
 function colorTimeBlocks() {
 
-    for (const val of timeBlockDivs) { // You can use `let` instead of `const` if you like
+    for (const val of timeBlockDivs) {
       var timeEl = val.querySelector('.hour');
       var blockEl = val.querySelector('.col-9');
     
@@ -40,7 +41,17 @@ function colorTimeBlocks() {
     }
 }
 
-colorTimeBlocks();
-
 // use moment.js to determine current date and write to todaysDate variable
 todaysDate.textContent = moment().format('dddd, MMMM Do YYYY')
+
+colorTimeBlocks();
+
+//iterate through elements with saveBtn class and add event listener to each button/anchor
+for (const val of saveActivity) {
+    val.addEventListener("click", function() {
+    var activityEntry = this.parentElement.querySelector(".description").value;
+    console.log(activityEntry);
+  });
+    
+    //console.log(val);
+}
